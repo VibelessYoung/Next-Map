@@ -2,7 +2,7 @@
 
 import { MapContainer, TileLayer } from "react-leaflet";
 
-export default function Map() {
+export default function GlobalMap() {
   return (
     <MapContainer
       center={[35.6892, 51.389]}

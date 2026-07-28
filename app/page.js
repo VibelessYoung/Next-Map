@@ -1,7 +1,9 @@
-import Image from "next/image";
+import MapWrapper from "@/app/components/MapWrapper";
 
 export default function Home() {
   return (
-    <h1 className="">hi</h1>
+    <main className="h-screen w-full">
+      <MapWrapper />
+    </main>
   );
 }
