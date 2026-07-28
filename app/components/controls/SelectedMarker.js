@@ -14,12 +14,20 @@ const redIcon = new L.Icon({
   iconAnchor: [12, 41],
 });
 
-export default function SelectedMarker({ location }) {
+export default function SelectedMarker({ location, onOpen }) {
   if (!location) return null;
 
   return (
-    <Marker position={location} icon={redIcon}>
-      <Popup>انتخاب شده</Popup>
+    <Marker
+      position={location}
+      icon={redIcon}
+      eventHandlers={{
+        click() {
+          onOpen(location);
+        },
+      }}
+    >
+      <Popup>برای اطلاعات کلیک کنید</Popup>
     </Marker>
   );
 }

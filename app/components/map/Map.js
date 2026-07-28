@@ -7,11 +7,13 @@ import FlyToCurrentLocation from "../controls/FlyToCurrentLocation";
 import MapClickHandler from "../controls/MapClickHandler";
 import SelectedMarker from "../controls/SelectedMarker";
 import useReverseGeocode from "@/app/hooks/useReverseGeocode";
+import LocationModal from "../modal/LocationModal";
 
 export default function GlobalMap() {
   const [loading, setLoading] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const { place, getPlace } = useReverseGeocode();
 
   const handleCurrentLocation = () => {
@@ -32,28 +34,41 @@ export default function GlobalMap() {
     );
   };
   return (
-    <MapContainer
-      center={[35.6892, 51.389]}
-      zoom={12}
-      className="h-screen w-full"
-    >
-      <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <MapClickHandler
-        onLocationSelect={(location) => {
-          setSelectedLocation(location);
+    <>
+      <MapContainer
+        center={[35.6892, 51.389]}
+        zoom={12}
+        className="h-screen w-full"
+      >
+        <TileLayer
+          attribution="&copy; OpenStreetMap contributors"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <MapClickHandler
+          onLocationSelect={(location) => {
+            setSelectedLocation(location);
+          }}
+        />
+        <SelectedMarker
+          location={selectedLocation}
+          onOpen={(location) => {
+            setShowModal(true);
 
-          getPlace(location[0], location[1]);
-        }}
+            getPlace(location[0], location[1]);
+          }}
+        />
+        <FlyToCurrentLocation location={userLocation} />
+        <CurrentLocationButton
+          loading={loading}
+          onClick={handleCurrentLocation}
+        />
+      </MapContainer>
+      <LocationModal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        place={place}
+        location={selectedLocation}
       />
-      <SelectedMarker location={selectedLocation} />
-      <FlyToCurrentLocation location={userLocation} />
-      <CurrentLocationButton
-        loading={loading}
-        onClick={handleCurrentLocation}
-      />
-    </MapContainer>
+    </>
   );
 }
