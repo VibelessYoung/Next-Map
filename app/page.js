@@ -1,4 +1,4 @@
-import MapWrapper from "@/app/components/MapWrapper";
+import MapWrapper from "@/app/components/map/MapWrapper";
 
 export default function Home() {
   return (
