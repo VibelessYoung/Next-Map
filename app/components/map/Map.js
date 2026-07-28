@@ -5,6 +5,7 @@ import { useState } from "react";
 import CurrentLocationButton from "../controls/CurrentLocationButton";
 import FlyToCurrentLocation from "../controls/FlyToCurrentLocation";
 import MapClickHandler from "../controls/MapClickHandler";
+import SelectedMarker from "../controls/SelectedMarker";
 
 export default function GlobalMap() {
   const [loading, setLoading] = useState(false);
@@ -39,6 +40,7 @@ export default function GlobalMap() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <MapClickHandler onLocationSelect={setSelectedLocation} />
+      <SelectedMarker location={selectedLocation} />
       <FlyToCurrentLocation location={userLocation} />
       <CurrentLocationButton
         loading={loading}
