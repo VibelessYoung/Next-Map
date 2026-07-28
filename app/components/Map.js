@@ -2,18 +2,21 @@
 
 import { MapContainer, TileLayer } from "react-leaflet";
 import { useState } from "react";
-import CurrentLocationButton from "./map/CurrentLocationButton"
+import CurrentLocationButton from "./map/CurrentLocationButton";
+import FlyToCurrentLocation from "./map/FlyToCurrentLocation";
 
 export default function GlobalMap() {
   const [loading, setLoading] = useState(false);
+  const [userLocation, setUserLocation] = useState(null);
 
   const handleCurrentLocation = () => {
     setLoading(true);
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log(position.coords.latitude);
-        console.log(position.coords.longitude);
+        const location = [position.coords.latitude, position.coords.longitude];
+
+        setUserLocation(location);
 
         setLoading(false);
       },
@@ -33,6 +36,7 @@ export default function GlobalMap() {
         attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+      <FlyToCurrentLocation location={userLocation} />
       <CurrentLocationButton
         loading={loading}
         onClick={handleCurrentLocation}
