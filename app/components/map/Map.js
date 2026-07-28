@@ -6,11 +6,13 @@ import CurrentLocationButton from "../controls/CurrentLocationButton";
 import FlyToCurrentLocation from "../controls/FlyToCurrentLocation";
 import MapClickHandler from "../controls/MapClickHandler";
 import SelectedMarker from "../controls/SelectedMarker";
+import useReverseGeocode from "@/app/hooks/useReverseGeocode";
 
 export default function GlobalMap() {
   const [loading, setLoading] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const { place, getPlace } = useReverseGeocode();
 
   const handleCurrentLocation = () => {
     setLoading(true);
@@ -39,7 +41,13 @@ export default function GlobalMap() {
         attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <MapClickHandler onLocationSelect={setSelectedLocation} />
+      <MapClickHandler
+        onLocationSelect={(location) => {
+          setSelectedLocation(location);
+
+          getPlace(location[0], location[1]);
+        }}
+      />
       <SelectedMarker location={selectedLocation} />
       <FlyToCurrentLocation location={userLocation} />
       <CurrentLocationButton
