@@ -10,13 +10,18 @@ import useReverseGeocode from "@/app/hooks/useReverseGeocode";
 import LocationModal from "../modal/LocationModal";
 import LocationSearch from "../search/LocationSearch";
 import FlyToLocation from "../controls/FlyToLocation";
+import useRoute from "@/app/hooks/useRoute";
+import RouteLayer from "../map/route/RouteLayer";
+import FitRouteBounds from "../map/route/FitRouteBounds";
 
 export default function GlobalMap() {
   const [loading, setLoading] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [isRouting, setIsRouting] = useState(false);
   const { place, getPlace } = useReverseGeocode();
+  const { route, routeInfo, loading: routeLoading, getRoute } = useRoute();
 
   const handleCurrentLocation = () => {
     setLoading(true);
@@ -55,6 +60,9 @@ export default function GlobalMap() {
           attribution="&copy; OpenStreetMap contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        <RouteLayer route={route} />
+
+        <FitRouteBounds route={route} />
         <MapClickHandler
           onLocationSelect={(location) => {
             setSelectedLocation(location);
@@ -80,6 +88,14 @@ export default function GlobalMap() {
         onClose={() => setShowModal(false)}
         place={place}
         location={selectedLocation}
+        canRoute={Boolean(userLocation)}
+        onRoute={() => {
+          if (!userLocation || !selectedLocation) return;
+
+          getRoute(userLocation, selectedLocation);
+
+          setShowModal(false);
+        }}
       />
     </>
   );

@@ -2,7 +2,14 @@
 
 import { MapPin, X, Navigation, Globe, Map, LoaderCircle } from "lucide-react";
 
-export default function LocationModal({ open, onClose, place, location }) {
+export default function LocationModal({
+  open,
+  onClose,
+  place,
+  location,
+  onRoute,
+  canRoute,
+}) {
   if (!open) return null;
 
   return (
@@ -194,6 +201,33 @@ export default function LocationModal({ open, onClose, place, location }) {
 
               <p>در حال دریافت اطلاعات مکان...</p>
             </div>
+          )}
+          <button
+            onClick={onRoute}
+            disabled={!canRoute}
+            className={`
+    flex
+    w-full
+    items-center
+    justify-center
+    rounded-2xl
+    py-4
+    mx-1
+    font-semibold
+    transition
+    ${
+      canRoute
+        ? "bg-blue-600 text-white hover:bg-blue-700"
+        : "bg-gray-200 text-gray-500 cursor-not-allowed"
+    }
+  `}
+          >
+            مسیریابی
+          </button>
+          {!canRoute && (
+            <p dir="rtl" className="m-3 text-center text-sm text-red-500">
+              برای مسیریابی ابتدا موقعیت فعلی خود را مشخص کنید.
+            </p>
           )}
         </div>
       </div>
