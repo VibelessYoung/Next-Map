@@ -8,6 +8,8 @@ import MapClickHandler from "../controls/MapClickHandler";
 import SelectedMarker from "../controls/SelectedMarker";
 import useReverseGeocode from "@/app/hooks/useReverseGeocode";
 import LocationModal from "../modal/LocationModal";
+import LocationSearch from "../search/LocationSearch";
+import FlyToLocation from "../controls/FlyToLocation";
 
 export default function GlobalMap() {
   const [loading, setLoading] = useState(false);
@@ -35,6 +37,15 @@ export default function GlobalMap() {
   };
   return (
     <>
+      <LocationSearch
+        onSelect={(item) => {
+          const location = [Number(item.lat), Number(item.lon)];
+
+          setSelectedLocation(location);
+
+          getPlace(location[0], location[1]);
+        }}
+      />
       <MapContainer
         center={[35.6892, 51.389]}
         zoom={12}
@@ -57,6 +68,7 @@ export default function GlobalMap() {
             getPlace(location[0], location[1]);
           }}
         />
+        <FlyToLocation location={selectedLocation} />
         <FlyToCurrentLocation location={userLocation} />
         <CurrentLocationButton
           loading={loading}
