@@ -13,6 +13,9 @@ import FlyToLocation from "../controls/FlyToLocation";
 import useRoute from "@/app/hooks/useRoute";
 import RouteLayer from "../map/route/RouteLayer";
 import FitRouteBounds from "../map/route/FitRouteBounds";
+import useSavedPlaces from "@/app/hooks/useSavedPlaces";
+import SavedPlacesButton from "../saved/SavedPlacesButton";
+import SavedPlacesDrawer from "../saved/SavedPlacesDrawer";
 
 export default function GlobalMap() {
   const [loading, setLoading] = useState(false);
@@ -20,8 +23,10 @@ export default function GlobalMap() {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [isRouting, setIsRouting] = useState(false);
+  const [openSaved, setOpenSaved] = useState(false);
   const { place, getPlace } = useReverseGeocode();
   const { route, routeInfo, loading: routeLoading, getRoute } = useRoute();
+  const { savedPlaces, savePlace, removePlace, clearPlaces } = useSavedPlaces();
 
   const handleCurrentLocation = () => {
     setLoading(true);
@@ -82,8 +87,16 @@ export default function GlobalMap() {
           loading={loading}
           onClick={handleCurrentLocation}
         />
+        <SavedPlacesButton
+          count={savedPlaces.length}
+          onClick={() => setOpenSaved(true)}
+        />
+        <SavedPlacesDrawer open={openSaved} />
       </MapContainer>
       <LocationModal
+        onSave={() => {
+          savePlace(place, selectedLocation);
+        }}
         open={showModal}
         onClose={() => setShowModal(false)}
         place={place}

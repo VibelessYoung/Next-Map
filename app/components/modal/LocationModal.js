@@ -9,6 +9,7 @@ export default function LocationModal({
   location,
   onRoute,
   canRoute,
+  onSave,
 }) {
   if (!open) return null;
 
@@ -229,6 +230,26 @@ export default function LocationModal({
               برای مسیریابی ابتدا موقعیت فعلی خود را مشخص کنید.
             </p>
           )}
+          <button
+            onClick={onSave}
+            className="
+  mt-3
+  flex
+  w-full
+  items-center
+  justify-center
+  rounded-2xl
+  border
+  border-blue-600
+  py-4
+  font-semibold
+  text-blue-600
+  transition
+  hover:bg-blue-50
+"
+          >
+             ذخیره مکان
+          </button>
         </div>
       </div>
     </div>
