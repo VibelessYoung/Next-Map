@@ -39,7 +39,7 @@ export default function SavedPlacesDrawer({
       {/* Header */}
 
       <div className="flex items-center justify-between border-b p-5">
-        <h2 className="text-xl font-bold">مکان‌های ذخیره شده</h2>
+        <h2 className="text-xl font-bold ">مکان‌های ذخیره شده</h2>
 
         <button onClick={onClose}>
           <X />
@@ -65,6 +65,7 @@ export default function SavedPlacesDrawer({
             pl-10
             pr-4
             outline-none
+            
             "
           />
         </div>
@@ -74,7 +75,7 @@ export default function SavedPlacesDrawer({
 
       <div className="flex-1 overflow-y-auto">
         {filteredPlaces.length === 0 && (
-          <div className="mt-20 text-center text-gray-400">
+          <div className="mt-20 text-center text-gray-400 ">
             مکانی ذخیره نشده
           </div>
         )}
@@ -141,6 +142,7 @@ export default function SavedPlacesDrawer({
           onClick={onClear}
           className="
           w-full
+          
           rounded-xl
           bg-red-500
           py-3
