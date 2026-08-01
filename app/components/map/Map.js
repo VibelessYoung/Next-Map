@@ -91,7 +91,22 @@ export default function GlobalMap() {
           count={savedPlaces.length}
           onClick={() => setOpenSaved(true)}
         />
-        <SavedPlacesDrawer open={openSaved} />
+        <SavedPlacesDrawer
+          open={openSaved}
+          onClose={() => setOpenSaved(false)}
+          places={savedPlaces}
+          onDelete={removePlace}
+          onClear={clearPlaces}
+          onFly={(item) => {
+            setSelectedLocation([item.lat, item.lng]);
+
+            getPlace(
+              item.lat,
+
+              item.lng,
+            );
+          }}
+        />
       </MapContainer>
       <LocationModal
         onSave={() => {
