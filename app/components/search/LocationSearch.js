@@ -28,6 +28,8 @@ export default function LocationSearch({ onSelect }) {
         gap-3
         rounded-2xl
         bg-white
+        dark:bg-black
+        dark:text-white
         px-5
         py-3
         shadow-xl

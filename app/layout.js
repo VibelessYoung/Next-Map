@@ -14,8 +14,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fa" dir="rtl">
-      <body className={vazir.className}>
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
+      <body className={`${vazir.className} antialiased`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
