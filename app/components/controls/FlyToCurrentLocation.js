@@ -1,6 +1,5 @@
 "use client";
 
-import { CigaretteOffIcon } from "lucide-react";
 import { useEffect } from "react";
 import { useMap, CircleMarker, Circle } from "react-leaflet";
 
