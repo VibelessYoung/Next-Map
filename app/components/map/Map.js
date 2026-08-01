@@ -16,6 +16,7 @@ import FitRouteBounds from "../map/route/FitRouteBounds";
 import useSavedPlaces from "@/app/hooks/useSavedPlaces";
 import SavedPlacesButton from "../saved/SavedPlacesButton";
 import SavedPlacesDrawer from "../saved/SavedPlacesDrawer";
+import ThemeButton from "../controls/ThemeButton";
 
 export default function GlobalMap() {
   const [loading, setLoading] = useState(false);
@@ -47,6 +48,7 @@ export default function GlobalMap() {
   };
   return (
     <>
+      <ThemeButton />
       <LocationSearch
         onSelect={(item) => {
           const location = [Number(item.lat), Number(item.lon)];
