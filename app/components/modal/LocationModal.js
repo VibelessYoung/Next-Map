@@ -34,6 +34,7 @@ export default function LocationModal({
         overflow-hidden
         rounded-3xl
         bg-white
+        dark:bg-black
         shadow-2xl
         animate-in
         fade-in
@@ -69,7 +70,7 @@ export default function LocationModal({
             </div>
 
             <div>
-              <h2 className="font-bold text-lg">اطلاعات مکان</h2>
+              <h2 className="font-bold text-lg dark:text-white">اطلاعات مکان</h2>
 
               <p className="text-sm text-gray-500">Location Details</p>
             </div>
@@ -104,6 +105,9 @@ export default function LocationModal({
                 className="
                 rounded-2xl
                 bg-gray-50
+                dark:bg-black
+                dark:border
+                dark:border-white
                 p-4
                 "
               >
@@ -126,6 +130,7 @@ export default function LocationModal({
                   text-sm
                   leading-6
                   text-gray-700
+                  dark:text-white
                   "
                 >
                   {place.display_name}
@@ -266,6 +271,7 @@ function InfoItem({ icon, title, value }) {
       rounded-xl
       border
       p-3
+      dark:text-white
       "
     >
       <div

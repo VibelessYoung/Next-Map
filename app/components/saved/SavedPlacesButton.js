@@ -18,6 +18,8 @@ export default function SavedPlacesButton({ count, onClick }) {
       justify-center
       rounded-full
       bg-white
+      dark:bg-black
+      dark:text-red-500
       shadow-xl
       transition
       hover:scale-105

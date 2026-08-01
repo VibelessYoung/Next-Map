@@ -19,6 +19,8 @@ export default function CurrentLocationButton({ loading, onClick }) {
         justify-center
         rounded-full
         bg-white
+        dark:bg-black
+        dark:text-white
         shadow-xl
         transition
         hover:scale-105

@@ -31,6 +31,7 @@ export default function SavedPlacesDrawer({
       h-full
       w-[380px]
       bg-white
+      dark:bg-black
       shadow-2xl
       flex
       flex-col
@@ -38,10 +39,10 @@ export default function SavedPlacesDrawer({
     >
       {/* Header */}
 
-      <div className="flex items-center justify-between border-b p-5">
-        <h2 className="text-xl font-bold ">مکان‌های ذخیره شده</h2>
+      <div className="flex items-center justify-between border-b dark:border-white p-5">
+        <h2 className="text-xl font-bold dark:text-white">مکان‌های ذخیره شده</h2>
 
-        <button onClick={onClose}>
+        <button className="dark:text-white" onClick={onClose}>
           <X />
         </button>
       </div>
@@ -65,7 +66,8 @@ export default function SavedPlacesDrawer({
             pl-10
             pr-4
             outline-none
-            
+            dark:border-white
+            dark:text-white
             "
           />
         </div>
@@ -75,7 +77,7 @@ export default function SavedPlacesDrawer({
 
       <div className="flex-1 overflow-y-auto">
         {filteredPlaces.length === 0 && (
-          <div className="mt-20 text-center text-gray-400 ">
+          <div className="mt-20 text-center text-gray-400 dark:text-white">
             مکانی ذخیره نشده
           </div>
         )}
@@ -87,15 +89,17 @@ export default function SavedPlacesDrawer({
             border-b
             p-4
             hover:bg-gray-50
+            dark:hover:bg-gray-900
             "
           >
-            <div className="font-semibold">{item.name}</div>
+            <div className="font-semibold dark:text-white">{item.name}</div>
 
             <div
               className="
               mt-1
               text-sm
               text-gray-500
+              dark:text-white
               line-clamp-2
               "
             >
