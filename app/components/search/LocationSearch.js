@@ -58,6 +58,7 @@ export default function LocationSearch({ onSelect }) {
           overflow-hidden
           rounded-2xl
           bg-white
+          dark:bg-black
           shadow-2xl
           "
         >
@@ -80,12 +81,13 @@ export default function LocationSearch({ onSelect }) {
               text-left
               transition
               hover:bg-gray-50
+              dark:hover:bg-gray-900
               "
             >
               <MapPin size={18} className="mt-1 text-red-500" />
 
               <div className="flex-1">
-                <p className="font-medium">
+                <p className="font-medium dark:text-white">
                   {item.name || item.display_name.split(",")[0]}
                 </p>
 
